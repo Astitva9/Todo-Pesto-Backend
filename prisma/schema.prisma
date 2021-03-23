@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ORGANIZATION {
+  ID         Int      @id @default(autoincrement())
+  NAME       String   @db.VarChar(100)
+  CREATED_AT DateTime @default(now()) @db.Timestamp(0)
+  UPDATED_AT DateTime @default(now()) @db.Timestamp(0)
+}
+
+model TODO {
+  ID              Int      @id @default(autoincrement())
+  ORGANIZATION_ID Int
+  TODO_TASK       String   @db.LongText
+  CREATED_AT      DateTime @default(now()) @db.Timestamp(0)
+  UPDATED_AT      DateTime @default(now()) @db.Timestamp(0)
+}
